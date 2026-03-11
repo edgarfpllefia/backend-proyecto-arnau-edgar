@@ -1,0 +1,304 @@
+### ============================================
+### AUTH
+### ============================================
+
+### Registro - Admin
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+    "email": "admin@test.com",
+    "password": "Admin1234!",
+    "nombre": "Administrador"
+}
+
+### Cambiar rol a admin (ejecutar en Supabase SQL Editor):
+### UPDATE perfiles SET rol = 'admin' WHERE email = 'admin@test.com';
+
+### Registro - DAW 1º - Carlos García
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+    "email": "carlos.garcia@test.com",
+    "password": "Test1234!",
+    "nombre": "Carlos García",
+    "ciclo": "DAW",
+    "curso": 1
+}
+
+### Registro - DAW 1º - Laura Martínez
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+    "email": "laura.martinez@test.com",
+    "password": "Test1234!",
+    "nombre": "Laura Martínez",
+    "ciclo": "DAW",
+    "curso": 1
+}
+
+### Registro - DAW 2º - Edgar BDN
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+    "email": "edgar.bdn@test.com",
+    "password": "Test1234!",
+    "nombre": "Edgar BDN",
+    "ciclo": "DAW",
+    "curso": 2
+}
+
+### Registro - DAW 2º - Arnau López
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+    "email": "arnau.lopez@test.com",
+    "password": "Test1234!",
+    "nombre": "Arnau López",
+    "ciclo": "DAW",
+    "curso": 2
+}
+
+### Registro - ARI 1º - Marc Soler
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+    "email": "marc.soler@test.com",
+    "password": "Test1234!",
+    "nombre": "Marc Soler",
+    "ciclo": "ARI",
+    "curso": 1
+}
+
+### Registro - ARI 2º - Paula Vidal
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+    "email": "paula.vidal@test.com",
+    "password": "Test1234!",
+    "nombre": "Paula Vidal",
+    "ciclo": "ARI",
+    "curso": 2
+}
+
+### Registro - SMR 1º - David Ruiz
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+    "email": "david.ruiz@test.com",
+    "password": "Test1234!",
+    "nombre": "David Ruiz",
+    "ciclo": "SMR",
+    "curso": 1
+}
+
+### Registro - SMR 2º - Marina Font
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+    "email": "marina.font@test.com",
+    "password": "Test1234!",
+    "nombre": "Marina Font",
+    "ciclo": "SMR",
+    "curso": 2
+}
+
+### Registro - IEA 1º - Jordi Pla
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+    "email": "jordi.pla@test.com",
+    "password": "Test1234!",
+    "nombre": "Jordi Pla",
+    "ciclo": "IEA",
+    "curso": 1
+}
+
+### Registro - IEA 2º - Ana Torres
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+    "email": "ana.torres@test.com",
+    "password": "Test1234!",
+    "nombre": "Ana Torres",
+    "ciclo": "IEA",
+    "curso": 2
+}
+
+### Login - Admin
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+    "email": "admin@test.com",
+    "password": "Admin1234!"
+}
+
+### Login - Edgar BDN
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+    "email": "edgar.bdn@test.com",
+    "password": "Test1234!"
+}
+
+### Me (reemplaza TOKEN por el token del login)
+GET http://localhost:3000/api/auth/me
+Authorization: Bearer TOKEN
+
+### Logout
+POST http://localhost:3000/api/auth/logout
+Authorization: Bearer TOKEN
+
+### ============================================
+### USUARIOS (requiere admin)
+### ============================================
+
+### Listar todos los usuarios
+GET http://localhost:3000/api/usuarios
+Authorization: Bearer TOKEN
+
+### Filtrar estudiantes de DAW
+GET http://localhost:3000/api/usuarios?rol=estudiante&ciclo=DAW
+Authorization: Bearer TOKEN
+
+### Obtener usuario por ID (reemplaza USER_ID)
+GET http://localhost:3000/api/usuarios/USER_ID
+Authorization: Bearer TOKEN
+
+### Editar usuario
+PUT http://localhost:3000/api/usuarios/USER_ID
+Content-Type: application/json
+Authorization: Bearer TOKEN
+
+{
+    "nombre": "Nombre Editado",
+    "ciclo": "DAW",
+    "curso": 2
+}
+
+### Eliminar usuario
+DELETE http://localhost:3000/api/usuarios/USER_ID
+Authorization: Bearer TOKEN
+
+### ============================================
+### MÓDULOS
+### ============================================
+
+### Listar todos los módulos
+GET http://localhost:3000/api/modulos
+Authorization: Bearer TOKEN
+
+### Filtrar módulos por ciclo y curso
+GET http://localhost:3000/api/modulos?ciclo=DAW&curso=2
+Authorization: Bearer TOKEN
+
+### Obtener módulo por ID
+GET http://localhost:3000/api/modulos/1
+Authorization: Bearer TOKEN
+
+### Crear módulo (admin)
+POST http://localhost:3000/api/modulos
+Content-Type: application/json
+Authorization: Bearer TOKEN
+
+{
+    "nombre": "Nuevo Módulo",
+    "ciclo": "DAW",
+    "curso": 1
+}
+
+### Editar módulo (admin)
+PUT http://localhost:3000/api/modulos/1
+Content-Type: application/json
+Authorization: Bearer TOKEN
+
+{
+    "nombre": "Módulo Editado",
+    "ciclo": "DAW",
+    "curso": 1
+}
+
+### Eliminar módulo (admin)
+DELETE http://localhost:3000/api/modulos/1
+Authorization: Bearer TOKEN
+
+### ============================================
+### MÓDULOS DEL ESTUDIANTE (reemplaza ESTUDIANTE_ID y MODULO_ID)
+### ============================================
+
+### Obtener módulos de un estudiante
+GET http://localhost:3000/api/estudiantes/ESTUDIANTE_ID/modulos
+Authorization: Bearer TOKEN
+
+### Obtener detalle de un módulo del estudiante
+GET http://localhost:3000/api/estudiantes/ESTUDIANTE_ID/modulos/MODULO_ID
+Authorization: Bearer TOKEN
+
+### Actualizar estado y notas del módulo del estudiante
+PUT http://localhost:3000/api/estudiantes/ESTUDIANTE_ID/modulos/MODULO_ID
+Content-Type: application/json
+Authorization: Bearer TOKEN
+
+{
+    "estado": "Cursando",
+    "nota_t1": 7.5,
+    "nota_t2": 8.0,
+    "nota_t3": null,
+    "nota_ordinaria": null,
+    "nota_extraordinaria": null
+}
+
+### ============================================
+### TAREAS (reemplaza ESTUDIANTE_ID, MODULO_ID, TAREA_ID)
+### ============================================
+
+### Listar tareas de un módulo de un estudiante
+GET http://localhost:3000/api/estudiantes/ESTUDIANTE_ID/modulos/MODULO_ID/tareas
+Authorization: Bearer TOKEN
+
+### Listar tareas filtradas
+GET http://localhost:3000/api/estudiantes/ESTUDIANTE_ID/modulos/MODULO_ID/tareas?estado=pendiente&orden=fecha_asc
+Authorization: Bearer TOKEN
+
+### Crear tarea
+POST http://localhost:3000/api/estudiantes/ESTUDIANTE_ID/modulos/MODULO_ID/tareas
+Content-Type: application/json
+Authorization: Bearer TOKEN
+
+{
+    "titulo": "Práctica 1 - SELECT",
+    "descripcion": "Realizar consultas SELECT sobre la base de datos de ejemplo",
+    "fecha_entrega": "2026-04-15",
+    "estado": "pendiente"
+}
+
+### Obtener tarea por ID
+GET http://localhost:3000/api/tareas/TAREA_ID
+Authorization: Bearer TOKEN
+
+### Editar tarea
+PUT http://localhost:3000/api/tareas/TAREA_ID
+Content-Type: application/json
+Authorization: Bearer TOKEN
+
+{
+    "titulo": "Práctica 1 - SELECT (editada)",
+    "estado": "completado",
+    "nota": 8.5
+}
+
+### Eliminar tarea
+DELETE http://localhost:3000/api/tareas/TAREA_ID
+Authorization: Bearer TOKEN
