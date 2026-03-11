@@ -6,7 +6,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-    origin: ['https://gestor-notas-sigma.vercel.app', 'http://localhost:5173'],
+    origin: ['https://gestor-notas-sigma.vercel.app', 'http://localhost:5173', /\.vercel\.app$/],
     credentials: true
 }));
 app.use(express.json());
