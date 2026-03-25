@@ -42,7 +42,15 @@ const login = async (req, res) => {
 
     const { data, error } = await supabase.auth.signInWithPassword({ email, password });
 
-    if (error) return res.status(400).json({ error: error.message });
+    if (error) {
+        const mensajes = {
+            'Invalid login credentials': 'Email o contraseña incorrectos',
+            'Email not confirmed': 'Debes confirmar tu email antes de iniciar sesión',
+            'Too many requests': 'Demasiados intentos. Espera unos minutos e inténtalo de nuevo',
+        }
+        const mensaje = mensajes[error.message] || 'Error al iniciar sesión'
+        return res.status(400).json({ error: mensaje })
+    }
 
     const { data: perfil } = await supabase
         .from('perfiles')
